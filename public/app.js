@@ -150,8 +150,9 @@ async function joinRoomById(roomId) {
       if (event.candidate) {
         const json = event.candidate.toJSON();
         calleecandidatesCollection.add(json);
-        console.log('Test 1');
+        
     }
+    console.log('Test 1');
     });
     
     
