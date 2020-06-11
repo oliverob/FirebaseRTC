@@ -62,7 +62,7 @@ async function createRoom() {
           sdp: offer.sdp
       }
   }
-  const roomRef = await db.collection('rooms').add(roomWithOffer); //add new room object to database in Cloud Firestore
+  await roomRef.set(roomWithOffer); //add new room object to database in Cloud Firestore
   const roomId = roomRef.id;
   document.querySelector('#currentRoom').innerText = `Current room is ${roomId} - You are the caller!`
   
