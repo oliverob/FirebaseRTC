@@ -72,7 +72,7 @@ async function createRoom() {
   // Code for collecting ICE candidates below
 
   
-  const candidatesCollection = roomRef.collection('callerCandidates');
+  const callercandidatesCollection = roomRef.collection('callerCandidates');
 
   peerConnection.addEventListener('icecandidate', event => {
     if (!event.candidate) {
@@ -145,7 +145,7 @@ async function joinRoomById(roomId) {
     // Code for collecting ICE candidates below
 
     
-    const candidatesCollection = roomRef.collection('calleeCandidates'); //Gets current list of candidates
+    const callleecandidatesCollection = roomRef.collection('calleeCandidates'); //Gets current list of candidates
 
     peerConnection.addEventListener('icecandidate', event => { //get candidates from API
       if (!event.candidate) {
@@ -153,7 +153,7 @@ async function joinRoomById(roomId) {
         return;
       }
       console.log('Got candidate: ', event.candidate);
-      callerCandidatesCollection.add(event.candidate.toJSON());
+      calleeCandidatesCollection.add(event.candidate.toJSON());
     });
     roomRef.collection('callerCandidates').onSnapshot(snapshot => { //When remote peer has ICE candidate added
       snapshot.docChanges().forEach(change => {
