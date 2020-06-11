@@ -47,6 +47,11 @@ async function createRoom() {
   console.log('Test 2');
   });
 
+  localStream.getTracks().forEach(track => {
+    peerConnection.addTrack(track, localStream);
+  });
+
+
   const offer = await peerConnection.createOffer(); //create an RTCSessionDescription that will represnt the offer from the caller
   await peerConnection.setLocalDescription(offer); //set this as a local description
   
@@ -62,10 +67,7 @@ async function createRoom() {
   
   // Code for creating room above
   
-  localStream.getTracks().forEach(track => {
-    peerConnection.addTrack(track, localStream);
-  });
-
+  
   // Code for creating a room below
   
   // Code for creating a room above
