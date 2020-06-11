@@ -174,6 +174,7 @@ async function joinRoomById(roomId) {
         remoteStream.addTrack(track);
       });
     });
+    
 
     // Code for creating SDP answer below
     const offer = roomSnapshot.data().offer; //gets offer from Cloud from snapshot taken from room ID provided
