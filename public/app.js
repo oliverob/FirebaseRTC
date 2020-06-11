@@ -57,15 +57,6 @@ async function createRoom() {
   });
 
   // Code for creating a room below
-  roomRef.onSnapshot(async snapshot => { //Runs everytime there is a change to this object and includes a snapshot of the object at the moment of change
-    console.log('Got updated room:', snapshot.data());
-    const data = snapshot.data();
-    if (!peerConnection.currentRemoteDescription && data.answer) {
-        console.log('Set remote description: ', data.answer);
-        const answer = new RTCSessionDescription(data.answer)
-        await peerConnection.setRemoteDescription(answer);
-    }
-});
   
   // Code for creating a room above
 
@@ -94,7 +85,16 @@ async function createRoom() {
   });
 
   // Listening for remote session description below
-
+  roomRef.onSnapshot(async snapshot => { //Runs everytime there is a change to this object and includes a snapshot of the object at the moment of change
+    console.log('Got updated room:', snapshot.data());
+    const data = snapshot.data();
+    if (!peerConnection.currentRemoteDescription && data.answer) {
+        console.log('Set remote description: ', data.answer);
+        const answer = new RTCSessionDescription(data.answer)
+        await peerConnection.setRemoteDescription(answer);
+    }
+});
+  
 
   // Listening for remote session description above
 
