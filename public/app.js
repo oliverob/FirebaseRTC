@@ -37,6 +37,16 @@ async function createRoom() {
 
   registerPeerConnectionListeners();
 
+  const callercandidatesCollection = roomRef.collection('callerCandidates');
+
+  peerConnection.addEventListener('icecandidate', event => {
+    if (event.candidate) {
+      const json = event.candidate.toJSON();
+      callercandidatesCollection.add(json);
+  }
+  console.log('Test 2');
+  });
+
   const offer = await peerConnection.createOffer(); //create an RTCSessionDescription that will represnt the offer from the caller
   await peerConnection.setLocalDescription(offer); //set this as a local description
   
@@ -63,14 +73,7 @@ async function createRoom() {
   // Code for collecting ICE candidates below
 
   
-  const callercandidatesCollection = roomRef.collection('callerCandidates');
-
-  peerConnection.addEventListener('icecandidate', event => {
-    if (event.candidate) {
-      const json = event.candidate.toJSON();
-      callercandidatesCollection.add(json);
-  }
-  });
+  
 
  
 
