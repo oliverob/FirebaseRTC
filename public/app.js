@@ -31,6 +31,7 @@ async function createRoom() {
   document.querySelector('#createBtn').disabled = true;
   document.querySelector('#joinBtn').disabled = true;
   const db = firebase.firestore();
+  const roomRef = await db.collection('rooms').doc();
 
   console.log('Create PeerConnection with configuration: ', configuration);
   peerConnection = new RTCPeerConnection(configuration);
