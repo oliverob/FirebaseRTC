@@ -40,7 +40,7 @@ async function createRoom() {
 
   const callercandidatesCollection = roomRef.collection('callerCandidates');
 
-  peerConnection.addEventListener('icecandidate', event => {
+  peerConnection.addEventListener('icecandidate', event => {//IMPORTANT: This needs to be set before creating the offer!!!!
     if (event.candidate) {
       const json = event.candidate.toJSON();
       callercandidatesCollection.add(json);
